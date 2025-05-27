@@ -1,0 +1,51 @@
+# Always need template version at the top to show format we going to use
+
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'IAM Cloudformation template'
+
+
+# Adding a group
+Resources:  
+  DevelopersGroup:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      GroupName: 'Developers'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/AmazonEC2FullAccess'  
+        - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
+        - 'arn:aws:iam::aws:policy/CloudWatchEventsFullAccess'
+
+  FinanceGroup:
+    Type: 'AWS::IAM::Group'
+    Properties:
+      GroupName: 'Finance'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/job-function/Billing'
+
+# Adding a IAM User
+ 
+  DeveloperUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: John_Dev
+
+  FinanceUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: Mike_Finance
+
+# Attach User to the Group 
+      
+  UserToDeveloper:
+    Type: 'AWS::IAM::UserToGroupAddition'
+    Properties: 
+      GroupName: !Ref DevelopersGroup
+      Users: 
+        - !Ref DeveloperUser
+  
+  UserToFinance:
+    Type: 'AWS::IAM::UserToGroupAddition'
+    Properties: 
+      GroupName: !Ref FinanceGroup
+      Users: 
+        - !Ref FinanceUser

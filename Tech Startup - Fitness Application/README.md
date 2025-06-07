@@ -132,54 +132,6 @@ This project was an incredible opportunity to apply best practices in cloud secu
 
 A faster approach through Infrastructure as Code:
 
-AWSTemplateFormatVersion: '2010-09-09'
-Description: 'IAM Cloudformation template'
-
-
-# Adding a group
-Resources:  
-  DevelopersGroup:
-    Type: 'AWS::IAM::Group'
-    Properties:
-      GroupName: 'Developers'
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/AmazonEC2FullAccess'  
-        - 'arn:aws:iam::aws:policy/AmazonS3FullAccess'
-        - 'arn:aws:iam::aws:policy/CloudWatchEventsFullAccess'
-
-  FinanceGroup:
-    Type: 'AWS::IAM::Group'
-    Properties:
-      GroupName: 'Finance'
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/job-function/Billing'
-
-# Adding a IAM User
- 
-  DeveloperUser:
-    Type: 'AWS::IAM::User'
-    Properties:
-      UserName: John_Dev
-
-  FinanceUser:
-    Type: 'AWS::IAM::User'
-    Properties:
-      UserName: Mike_Finance
-
-# Attach User to the Group 
-      
-  UserToDeveloper:
-    Type: 'AWS::IAM::UserToGroupAddition'
-    Properties: 
-      GroupName: !Ref DevelopersGroup
-      Users: 
-        - !Ref DeveloperUser
-  
-  UserToFinance:
-    Type: 'AWS::IAM::UserToGroupAddition'
-    Properties: 
-      GroupName: !Ref FinanceGroup
-      Users: 
-        - !Ref FinanceUser
+<img width="402" alt="iam snip" src="https://github.com/user-attachments/assets/7d1475af-0b47-4d0b-b873-ebfd65acd00e" />
 
 Through infrastructure as code we could have made the users a lot faster and made it reusable and scalable for future demand. The code above allows us to add multiple users and automatically add them to different groups with different permissions. Which would take a fraction of the time and make it reusable for adding more users in the future. ⚡⚡⚡

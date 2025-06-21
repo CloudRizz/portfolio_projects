@@ -1,5 +1,3 @@
-# portfolio_projects
-
 # 🚀 Portfolio Projects
 
 Welcome to my portfolio! This repository contains a collection of hands-on cloud engineering, DevOps, and software development projects that demonstrate my skills in AWS, infrastructure as code (IaC), automation, CI/CD, and system design.

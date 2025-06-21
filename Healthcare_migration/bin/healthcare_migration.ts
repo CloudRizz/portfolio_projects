@@ -1,24 +1,13 @@
-#!/usr/bin/env node
-import 'source-map-support/register' 
+#!/usr/bin/env node 
 import * as cdk from 'aws-cdk-lib';
-import { HealthcareMigrationStack } from '../lib/vpc-stack';
-import { EC2Stack } from '../lib/ec2-stack';
-import { RDSStack } from '../lib/rds-stack';
+import { HealthcareMigrationStack } from '../lib/healthcare_migration_stack';
 
 
 const app = new cdk.App();
-const vpcStack = new HealthcareMigrationStack(app, 'HealthcareMigrationStack', {
-  
+
+new HealthcareMigrationStack(app, 'HealthcareMigrationStack', {
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION || 'eu-west-2',
+  },
 });
-
-//// -- Create EC2 Stack --
-new EC2Stack(app, 'MyEC2Stack', {
-  vpc: vpcStack.vpc
-})
-
-//// -- Create RDS Stack --
-new RDSStack(app, 'MyRDSStack', {
-  vpc: vpcStack.vpc
-});
-
-app.synth()

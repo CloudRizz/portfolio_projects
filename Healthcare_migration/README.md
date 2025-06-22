@@ -1,14 +1,56 @@
-# Welcome to your CDK TypeScript project
+# TechHealth Infrastructure Migration
 
-This is a blank project for CDK development with TypeScript.
+This project leverages the AWS CDK with TypeScript to provision a secure cloud infrastructure for migrating applications. It sets up a VPC with public and private subnets spanning multiple availability zones, launches an EC2 instance, and deploys a MySQL RDS database.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Current Architecture
 
-## Useful commands
+![Project 2 - AWS migration - Current Architecture screenshot](https://github.com/user-attachments/assets/17003538-4405-487c-99bd-1addad91ba11)
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+## Revised Architecture
+
+- VPC: 2 Availability Zones with public and private subnets
+- EC2 Instance: Deployed in public subnets with a security group allowing ssh and HTTP access
+- RDS Database: MySQL 8.0 deployed in private subnet
+- Security Groups: COnfigured to allow neccessary traffic
+- IAM Roles: Set up for EC2 Instance with appropriate permissions to allow access to RDS Database
+
+![Project 2 - AWS migration - revised architecture screenshot](https://github.com/user-attachments/assets/a06461a4-900b-4256-a7d1-4a0545e74fec)
+
+## Baseline Requirements
+
+- AWS CLI installed and configured
+- AWS CDK installed globally
+- GitHub Repository
+
+## Project Initialization
+
+1. Clone the repository
+
+```
+git clone <repository-url>
+cd aws-migration-project
+```
+2. Install AWS CDK
+```
+## Install CDK
+npm install -g aws-cdk
+
+## Navigate to project directory
+cd <folder name>
+
+## Initialize CDK
+npx aws-cdk@latest init app --language=typescript
+
+```
+## Please ensure at this point the AWS CLI is installed and configured
+
+
+
+
+
+
+
+
+4. Bootstrap your AWS environment (only needs to be done once)
+5. Deploy the stack 
+
